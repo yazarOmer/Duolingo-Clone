@@ -90,10 +90,3 @@ export const logout = async (req: Request, res: Response) => {
   res.clearCookie("token");
   return res.status(200).json({ message: "User logged out successfully" });
 };
-
-export const gett = async (
-  req: Request & { userId?: string },
-  res: Response
-) => {
-  return res.json({ message: "success" });
-};
