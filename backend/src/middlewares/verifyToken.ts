@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const verifyToken = (
-  req: Request & { userId: string | JwtPayload },
+  req: Request & { userId?: string },
   res: Response,
   next: NextFunction
 ) => {
@@ -19,7 +19,7 @@ export const verifyToken = (
       return res.status(401).json({ message: "Unauthorized - invalid token" });
     }
 
-    req.userId = decoded.userId;
+    req.userId = decoded.userId as string;
 
     next();
   } catch (error) {

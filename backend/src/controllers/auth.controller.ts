@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../models/user.model";
 import bcryptjs from "bcryptjs";
 import { setToken } from "../helpers/setToken";
+import { JwtPayload } from "jsonwebtoken";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -88,4 +89,11 @@ export const login = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
   res.clearCookie("token");
   return res.status(200).json({ message: "User logged out successfully" });
+};
+
+export const gett = async (
+  req: Request & { userId?: string },
+  res: Response
+) => {
+  return res.json({ message: "success" });
 };
