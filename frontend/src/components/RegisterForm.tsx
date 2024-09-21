@@ -35,7 +35,8 @@ export const RegisterForm = () => {
     },
     onSuccess: (data) => {
       dispatch(setUser(data));
-      toast.success(`kullanıcı kayıt oldu.`);
+      toast.success(`Kayıt olma işlemi başarılı`);
+      //TODO: navigate protected page
     },
     onError: (error: AxiosError<{ message: string }>) => {
       dispatch(deleteUser());
