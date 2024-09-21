@@ -6,6 +6,12 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { FcGoogle } from "react-icons/fc";
+import { useMutation } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
+import { deleteUser, setUser } from "@/features/auth/authSlice";
+import { toast } from "sonner";
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -17,9 +23,30 @@ export const RegisterForm = () => {
     },
   });
 
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { mutate: RegisterMutation, isPending } = useMutation({
+    mutationFn: async (data: z.infer<typeof RegisterSchema>) => {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/register",
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (data) => {
+      dispatch(setUser(data));
+      toast.success(`kullanıcı kayıt oldu.`);
+    },
+    onError: (error: AxiosError<{ message: string }>) => {
+      dispatch(deleteUser());
+      toast.error(error.response?.data?.message);
+    },
+  });
+
   const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
-    console.log(data);
+    RegisterMutation(data);
   };
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl font-extrabold text-zinc-700 tracking-wide mb-8">
@@ -61,15 +88,20 @@ export const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Parola" {...field} />
+                  <Input placeholder="Parola" type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <Button variant="primary" className="w-full">
-            Hesap aç
+          <Button
+            disabled={isPending}
+            type="submit"
+            variant="primary"
+            className="w-full"
+          >
+            {isPending ? "..." : "Hesap aç"}
           </Button>
         </form>
       </Form>
