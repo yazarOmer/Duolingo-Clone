@@ -9,3 +9,10 @@ export const RegisterSchema = z.object({
     .email({ message: "Lütfen geçerli bir e-posta adresi girin" }),
   password: z.string().min(4, { message: "Parola 4 karakterden uzun olmalı" }),
 });
+
+export const LoginSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "Lütfen geçerli bir e-posta adresi girin" }),
+  password: z.string().min(4, { message: "Parola 4 karakterden uzun olmalı" }),
+});
