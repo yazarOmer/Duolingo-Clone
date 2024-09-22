@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
+import LearnPage from "./pages/protected/LearnPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/learn",
+    element: <LearnPage />,
   },
 ]);
 

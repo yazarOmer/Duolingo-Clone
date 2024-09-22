@@ -12,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { deleteUser, setUser } from "@/features/auth/authSlice";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -23,6 +24,7 @@ export const LoginForm = () => {
   });
 
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const { mutate: LoginMutation, isPending } = useMutation({
     mutationFn: async (data: z.infer<typeof LoginSchema>) => {
@@ -35,7 +37,7 @@ export const LoginForm = () => {
     onSuccess: (data) => {
       dispatch(setUser(data));
       toast.success(`Giriş yapma işlemi başarılı`);
-      //TODO: navigate protected page
+      navigate("/learn");
     },
     onError: (error: AxiosError<{ message: string }>) => {
       dispatch(deleteUser());
@@ -48,7 +50,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center px-5">
       <h1 className="text-2xl font-extrabold text-zinc-700 tracking-wide mb-8">
         Oturum aç
       </h1>

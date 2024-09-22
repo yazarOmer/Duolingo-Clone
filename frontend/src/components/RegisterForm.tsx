@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { deleteUser, setUser } from "@/features/auth/authSlice";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -24,6 +25,7 @@ export const RegisterForm = () => {
   });
 
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const { mutate: RegisterMutation, isPending } = useMutation({
     mutationFn: async (data: z.infer<typeof RegisterSchema>) => {
@@ -36,7 +38,7 @@ export const RegisterForm = () => {
     onSuccess: (data) => {
       dispatch(setUser(data));
       toast.success(`Kayıt olma işlemi başarılı`);
-      //TODO: navigate protected page
+      navigate("/learn");
     },
     onError: (error: AxiosError<{ message: string }>) => {
       dispatch(deleteUser());
@@ -49,7 +51,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center px-5">
       <h1 className="text-2xl font-extrabold text-zinc-700 tracking-wide mb-8">
         Profilini oluştur
       </h1>

@@ -8,7 +8,7 @@ const LoginPage = () => {
       <Button asChild className="absolute top-10 right-10">
         <Link to="/register">KAYDOL</Link>
       </Button>
-      <div className="max-w-sm w-full">
+      <div className="max-w-[400px] w-full">
         <LoginForm />
       </div>
     </div>
