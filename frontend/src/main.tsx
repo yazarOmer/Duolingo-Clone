@@ -10,23 +10,42 @@ import { Toaster } from "sonner";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import LearnPage from "./pages/protected/LearnPage.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import AuthRoute from "./components/AuthRoute.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
   },
+  // {
+  //   path: "/register",
+  //   element: <RegisterPage />,
+  // },
+  // {
+  //   path: "/login",
+  //   element: <LoginPage />,
+  // },
+  // {
+  //   path: "/learn",
+  //   element: <LearnPage />,
+  // },
   {
-    path: "/register",
-    element: <RegisterPage />,
+    element: <ProtectedRoute />,
+    children: [{ path: "/learn", element: <LearnPage /> }],
   },
   {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/learn",
-    element: <LearnPage />,
+    element: <AuthRoute />,
+    children: [
+      {
+        path: "/register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+    ],
   },
 ]);
 
