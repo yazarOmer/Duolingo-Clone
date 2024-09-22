@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { SidebarItem } from "./SidebarItem";
+import { MoreButton } from "./MoreButton";
 
 interface SidebarProps {
   className?: string;
@@ -33,6 +34,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         />
         <SidebarItem label="shop" href="/shop" iconSrc="/shop.svg" />
         {/* TODO: ADD USER BUTTON */}
+        <MoreButton />
       </div>
     </div>
   );

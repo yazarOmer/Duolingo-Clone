@@ -37,6 +37,7 @@ export const LoginForm = () => {
     onSuccess: (data) => {
       dispatch(setUser(data));
       toast.success(`Giriş yapma işlemi başarılı`);
+      localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/learn");
     },
     onError: (error: AxiosError<{ message: string }>) => {

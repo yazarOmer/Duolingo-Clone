@@ -12,7 +12,7 @@ const AuthRoute = () => {
     if (user !== null) {
       navigate("/learn");
     }
-  }, []);
+  }, [user]);
 
   if (user == null) {
     return <Outlet />;

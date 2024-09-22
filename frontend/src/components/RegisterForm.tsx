@@ -33,11 +33,13 @@ export const RegisterForm = () => {
         "http://localhost:3000/api/auth/register",
         data
       );
+
       return response.data;
     },
     onSuccess: (data) => {
       dispatch(setUser(data));
       toast.success(`Kayıt olma işlemi başarılı`);
+      localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/learn");
     },
     onError: (error: AxiosError<{ message: string }>) => {

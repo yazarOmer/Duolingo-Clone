@@ -14,7 +14,7 @@ const ProtectedRoute = () => {
     if (user == null) {
       navigate("/login");
     }
-  }, []);
+  }, [user]);
 
   if (user !== null) {
     return (
