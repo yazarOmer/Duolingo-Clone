@@ -7,7 +7,6 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { Link } from "react-router-dom";
 
 export const Heart = () => {
   const user = useSelector((state: RootState) => state.auth.user);
