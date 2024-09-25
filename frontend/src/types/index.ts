@@ -7,3 +7,15 @@ export type User = {
   point: number;
   createdAt: string;
 };
+
+export type Unit = {
+  _id: string;
+  title: string;
+  description: string;
+};
+
+export type Lesson = {
+  _id: string;
+  title: string;
+  unitId: string;
+};

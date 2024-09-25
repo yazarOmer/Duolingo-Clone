@@ -1,9 +1,10 @@
+import { Feed } from "@/components/Feed";
 import { RightSidebar } from "@/components/RightSidebar";
 
 const LearnPage = () => {
   return (
-    <div className="flex gap-5 max-w-5xl mx-auto py-5">
-      <div className="flex-1 bg-rose-400 flex flex-col gap-2"></div>
+    <div className="flex gap-10 max-w-5xl mx-auto p-5">
+      <Feed />
       <RightSidebar />
     </div>
   );
