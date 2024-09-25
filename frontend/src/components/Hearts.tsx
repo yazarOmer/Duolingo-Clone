@@ -44,8 +44,13 @@ export const Heart = () => {
           {user?.lifePoint &&
             Array(user?.lifePoint)
               .fill(0)
-              .map(() => (
-                <img src="/heart.svg" alt="heart" className="size-7" />
+              .map((_, index) => (
+                <img
+                  key={index}
+                  src="/heart.svg"
+                  alt="heart"
+                  className="size-7"
+                />
               ))}
         </div>
         <p className="text-lg font-extrabold text-zinc-700">

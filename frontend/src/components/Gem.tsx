@@ -20,6 +20,11 @@ export const Gem = () => {
   const handleMouseLeave = () => {
     setOpen(false);
   };
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
@@ -30,7 +35,7 @@ export const Gem = () => {
         <Button variant="ghost">
           <img src="/gem.svg" alt="gem" className="size-6 mr-5" />
           <p className="font-extrabold text-sky-400 tracking-wider">
-            {user?.gem}
+            {user.gem}
           </p>
         </Button>
       </PopoverTrigger>
@@ -46,7 +51,7 @@ export const Gem = () => {
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-extrabold text-zinc-700">Mücevher</h1>
           <p className="font-semibold text-zinc-500">
-            {user?.gem} mücevherin var
+            {user.gem} mücevherin var
           </p>
           <Link
             to="/shop"
