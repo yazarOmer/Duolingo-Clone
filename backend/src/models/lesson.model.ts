@@ -10,6 +10,12 @@ const lessonSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Unit",
     },
+    questions: {
+      type: [Schema.Types.ObjectId],
+      required: true,
+      default: [],
+      ref: "Question",
+    },
   },
   {
     timestamps: true,

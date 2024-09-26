@@ -1,15 +1,28 @@
 import { Lesson } from "@/types";
 import { Button } from "./ui/button";
-import { Crown } from "lucide-react";
+import { Check, Crown, LockKeyhole } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type LessonButtonProps = {
   lesson: Lesson;
   isFirst: boolean;
   index: number;
+  isLocked: boolean;
+  isCompleted: boolean;
+  isCurrent: boolean;
+  isNew: boolean;
 };
 
-export const LessonButton = ({ lesson, isFirst, index }: LessonButtonProps) => {
+export const LessonButton = ({
+  lesson,
+  isFirst,
+  index,
+  isLocked,
+  isCompleted,
+  isCurrent,
+  isNew,
+}: LessonButtonProps) => {
+  const Icon = isLocked ? LockKeyhole : isCompleted ? Check : Crown;
   const cycleLen = 6;
 
   const itemIndex = index % cycleLen;
@@ -28,16 +41,24 @@ export const LessonButton = ({ lesson, isFirst, index }: LessonButtonProps) => {
   const rightPosition = indentationLevel * 40;
 
   return (
-    <Button
-      size="rounded"
-      variant="secondary"
-      style={{ right: rightPosition }}
-      className={cn(
-        "w-[72px] h-[72px] border-b-8 hover:border-b-[6px] relative",
-        isFirst && "mt-10"
-      )}
-    >
-      <Crown className="text-white size-8" />
-    </Button>
+    <div className="relative">
+      <Button
+        size="rounded"
+        variant={isLocked ? "locked" : "secondary"}
+        style={{ right: rightPosition }}
+        disabled={isLocked}
+        className={cn(
+          "w-[72px] h-[72px] border-b-8 hover:border-b-[6px] relative",
+          isFirst && "mt-10"
+        )}
+      >
+        <Icon
+          className={cn(
+            "text-white size-8",
+            isLocked ? "text-neutral-400 stroke-neutral-400" : ""
+          )}
+        />
+      </Button>
+    </div>
   );
 };

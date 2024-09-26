@@ -3,18 +3,27 @@ import { Unit as UnitType } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "./Loading";
 import { LessonButton } from "./LessonButton";
+import { getUserProgress } from "@/data/getUserProgress";
 
 type UnitProps = {
   unit: UnitType;
 };
 
 export const Unit = ({ unit }: UnitProps) => {
+  const {
+    data: userProgress,
+    isPending: pendingProgress,
+    isSuccess,
+  } = useQuery({
+    queryFn: getUserProgress,
+    queryKey: ["user-progress"],
+  });
   const { data: lessons, isPending } = useQuery({
     queryFn: getLessons,
     queryKey: ["lessons"],
   });
 
-  if (isPending) {
+  if (isPending || pendingProgress || !isSuccess) {
     return <Loading />;
   }
 
@@ -26,9 +35,32 @@ export const Unit = ({ unit }: UnitProps) => {
       </div>
       <div className="flex flex-col items-center gap-4">
         {lessons?.map((lesson, index) => {
+          const newUser =
+            userProgress &&
+            userProgress.completedQuestions &&
+            userProgress.completedQuestions.length == 0;
+          const isLocked = newUser && index !== 0;
           const isFirst = index === 0;
+
+          const isCompleted =
+            lesson.questions &&
+            lesson.questions.length > 0 &&
+            lesson.questions.every(
+              (val) =>
+                userProgress &&
+                userProgress.completedQuestions &&
+                userProgress.completedQuestions.length > 0 &&
+                userProgress.completedQuestions.includes(val)
+            );
           return (
-            <LessonButton lesson={lesson} isFirst={isFirst} index={index} />
+            <LessonButton
+              key={index}
+              lesson={lesson}
+              isFirst={isFirst}
+              index={index}
+              isLocked={isLocked}
+              isCompleted={isCompleted}
+            />
           );
         })}
       </div>

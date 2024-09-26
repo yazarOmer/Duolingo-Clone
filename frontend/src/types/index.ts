@@ -18,4 +18,10 @@ export type Lesson = {
   _id: string;
   title: string;
   unitId: string;
+  questions: string[];
+};
+
+export type UserProgress = {
+  userId: string;
+  completedQuestions: string[];
 };
