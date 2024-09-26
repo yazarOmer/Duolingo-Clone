@@ -35,11 +35,7 @@ export const Unit = ({ unit }: UnitProps) => {
       </div>
       <div className="flex flex-col items-center gap-4">
         {lessons?.map((lesson, index) => {
-          const newUser =
-            userProgress &&
-            userProgress.completedQuestions &&
-            userProgress.completedQuestions.length == 0;
-          const isLocked = newUser && index !== 0;
+          const isLocked = !userProgress.allowedLessons.includes(index + 1);
           const isFirst = index === 0;
 
           const isCompleted =

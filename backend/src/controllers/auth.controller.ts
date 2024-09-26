@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import { User } from "../models/user.model";
 import bcryptjs from "bcryptjs";
 import { setToken } from "../helpers/setToken";
-import { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { UserProgress } from "../models/userProgress.model";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -28,10 +29,14 @@ export const register = async (req: Request, res: Response) => {
 
     await user.save();
 
+    const progress = await UserProgress.create({ userId: user._id });
+    await progress.save();
+
     setToken(res, user._id);
 
     return res.status(201).json({
       user: {
+        id: user._id,
         username: user.username,
         email: user.email,
         isAdmin: user.isAdmin,
@@ -71,6 +76,7 @@ export const login = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       user: {
+        id: user._id,
         username: user.username,
         email: user.email,
         isAdmin: user.isAdmin,
@@ -89,4 +95,28 @@ export const login = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
   res.clearCookie("token");
   return res.status(200).json({ message: "User logged out successfully" });
+};
+
+export const getUser = async (req: Request, res: Response) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized - no token" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+
+    if (!decoded) {
+      return res.status(401).json({ message: "Unauthorized - invalid token" });
+    }
+
+    const userId = decoded.userId as string;
+
+    return res.status(200).json(userId);
+  } catch (err) {
+    if (err instanceof Error) {
+      return res.status(400).json({ message: err.message });
+    }
+  }
 };

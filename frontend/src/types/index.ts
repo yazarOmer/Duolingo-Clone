@@ -24,4 +24,5 @@ export type Lesson = {
 export type UserProgress = {
   userId: string;
   completedQuestions: string[];
+  allowedLessons: number[];
 };

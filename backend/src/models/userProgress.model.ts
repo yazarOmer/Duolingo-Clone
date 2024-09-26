@@ -11,6 +11,11 @@ const userProgressSchema = new mongoose.Schema({
     required: true,
     default: [],
   },
+  allowedLessons: {
+    type: mongoose.Schema.Types.Array,
+    required: true,
+    default: [1],
+  },
 });
 
 export const UserProgress = mongoose.model("UserProgress", userProgressSchema);
