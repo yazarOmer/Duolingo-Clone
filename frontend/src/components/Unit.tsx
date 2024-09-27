@@ -36,6 +36,7 @@ export const Unit = ({ unit }: UnitProps) => {
       <div className="flex flex-col items-center gap-4">
         {lessons?.map((lesson, index) => {
           const isLocked = !userProgress.allowedLessons.includes(index + 1);
+          const isCurrent = userProgress.allowedLessons.at(-1) == index + 1;
           const isFirst = index === 0;
 
           const isCompleted =
@@ -53,6 +54,7 @@ export const Unit = ({ unit }: UnitProps) => {
               key={index}
               lesson={lesson}
               isFirst={isFirst}
+              isCurrent={isCurrent}
               index={index}
               isLocked={isLocked}
               isCompleted={isCompleted}
