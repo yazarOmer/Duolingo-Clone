@@ -35,16 +35,14 @@ export const register = async (req: Request, res: Response) => {
     setToken(res, user._id);
 
     return res.status(201).json({
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        gem: user.gem,
-        lifePoint: user.lifePoint,
-        point: user.point,
-        createdAt: user.createdAt,
-      },
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      gem: user.gem,
+      lifePoint: user.lifePoint,
+      point: user.point,
+      createdAt: user.createdAt,
     });
   } catch (error) {
     if (error instanceof Error)
@@ -75,16 +73,14 @@ export const login = async (req: Request, res: Response) => {
     setToken(res, user._id);
 
     return res.status(200).json({
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        gem: user.gem,
-        lifePoint: user.lifePoint,
-        point: user.point,
-        createdAt: user.createdAt,
-      },
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      gem: user.gem,
+      lifePoint: user.lifePoint,
+      point: user.point,
+      createdAt: user.createdAt,
     });
   } catch (error) {
     if (error instanceof Error)

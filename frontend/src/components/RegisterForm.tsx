@@ -39,7 +39,7 @@ export const RegisterForm = () => {
     onSuccess: (data) => {
       dispatch(setUser(data));
       toast.success(`Kayıt olma işlemi başarılı`);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(data));
       navigate("/learn");
     },
     onError: (error: AxiosError<{ message: string }>) => {

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 export const Gem = () => {
   const user = useSelector((state: RootState) => state.auth.user);
+
   const [open, setOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -51,7 +52,7 @@ export const Gem = () => {
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-extrabold text-zinc-700">Mücevher</h1>
           <p className="font-semibold text-zinc-500">
-            {user.gem} mücevherin var
+            {user?.gem} mücevherin var
           </p>
           <Link
             to="/shop"
