@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { Check, Crown, LockKeyhole } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Link } from "react-router-dom";
 
 type LessonButtonProps = {
   lesson: Lesson;
@@ -77,8 +78,8 @@ export const LessonButton = ({
               <p className="font-semibold mb-2">
                 Yeterliliğini Efsanevi düzeyle kanıtla
               </p>
-              <Button className="w-full text-green-500">
-                alıştırma +5 puan
+              <Button asChild className="w-full text-green-500">
+                <Link to={`/lesson/${lesson._id}`}>alıştırma +5 puan</Link>
               </Button>
             </PopoverContent>
           </Popover>

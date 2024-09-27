@@ -12,6 +12,7 @@ import { store } from "./store/store.ts";
 import LearnPage from "./pages/protected/LearnPage.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import AuthRoute from "./components/AuthRoute.tsx";
+import LessonPage from "./pages/protected/LessonPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
     ],
+  },
+  {
+    path: "/lesson/:id",
+    element: <LessonPage />,
   },
 ]);
 

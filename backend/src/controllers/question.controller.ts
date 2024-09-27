@@ -28,7 +28,7 @@ export const createQuestion = async (req: Request, res: Response) => {
 
 export const getQuestionsByLessonId = async (req: Request, res: Response) => {
   try {
-    const { lessonId } = req.body;
+    const { lessonId } = req.params;
     const questions = await Question.find({ lessonId });
 
     return res.status(200).json(questions);

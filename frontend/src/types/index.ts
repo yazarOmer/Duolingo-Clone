@@ -26,3 +26,13 @@ export type UserProgress = {
   completedQuestions: string[];
   allowedLessons: number[];
 };
+
+export type Question = {
+  _id: string;
+  type: "SELECT" | "ASSIST";
+  data: {
+    question: string;
+    options: string[];
+  };
+  lessonId: string;
+};
