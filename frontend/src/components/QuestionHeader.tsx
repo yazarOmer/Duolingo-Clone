@@ -19,7 +19,7 @@ export const QuestionHeader = ({
   const [open, setOpen] = useState(false);
   const user = useSelector((state: RootState) => state.auth.user);
   return (
-    <div className="w-full py-14 flex items-center justify-center gap-10">
+    <div className="w-full max-w-6xl mx-auto py-14 flex items-center justify-center gap-10">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger>
           <Button size="icon" variant="ghost">

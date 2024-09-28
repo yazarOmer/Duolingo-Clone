@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 const LessonPage = () => {
   const { id } = useParams();
   const [order, setOrder] = useState(0);
+  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
 
   const { data: questions, isLoading } = useQuery({
     queryKey: ["questions", id],
@@ -25,15 +27,21 @@ const LessonPage = () => {
   const actualQuestion = questions.notCompletedQuestions[order];
   const totalQuestion = questions.totalQuestionsLength;
 
+  const onSelect = (option: string) => {
+    if (status !== "none") return;
+
+    setSelectedOption(option);
+  };
+
   return (
-    <div className="max-w-6xl mx-auto">
-      <Question
-        question={actualQuestion}
-        onNext={setOrder}
-        totalQuestionLen={totalQuestion}
-        completedLen={totalQuestion - questions.notCompletedQuestions.length}
-      />
-    </div>
+    <Question
+      question={actualQuestion}
+      onSelect={onSelect}
+      selectedOption={selectedOption}
+      totalQuestionLen={totalQuestion}
+      completedLen={totalQuestion - questions.notCompletedQuestions.length}
+      status={status}
+    />
   );
 };
 
