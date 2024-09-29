@@ -10,7 +10,8 @@ type QuestionProps = {
   completedLen: number;
   status: "correct" | "wrong" | "none";
   onSelect: (option: string) => void;
-  selectedOption: string;
+  selectedOption: string | undefined;
+  onContinue: () => void;
 };
 
 export const Question = ({
@@ -20,6 +21,7 @@ export const Question = ({
   completedLen,
   onSelect,
   status,
+  onContinue,
 }: QuestionProps) => {
   return (
     <div className="flex flex-col h-screen">
@@ -41,7 +43,7 @@ export const Question = ({
         <QuestionFooter
           disabled={!selectedOption}
           status={status}
-          onCheck={() => {}}
+          onCheck={onContinue}
         />
       </div>
     </div>

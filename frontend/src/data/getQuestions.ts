@@ -15,6 +15,8 @@ export const getQuestions = async (lessonId: string) => {
     (q) => !progress.completedQuestions.includes(q._id)
   );
 
+  console.log(filteredQuestions);
+
   return {
     totalQuestionsLength: questions.length,
     completedQuestionsLength: questions.length - filteredQuestions.length,

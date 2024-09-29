@@ -11,7 +11,7 @@ const lessonSchema = new mongoose.Schema(
       ref: "Unit",
     },
     questions: {
-      type: [Schema.Types.ObjectId],
+      type: [Schema.Types.String],
       required: true,
       default: [],
       ref: "Question",

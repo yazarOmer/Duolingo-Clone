@@ -1,4 +1,5 @@
 export type User = {
+  id: string;
   username: string;
   email: string;
   isAdmin: boolean;
@@ -27,12 +28,17 @@ export type UserProgress = {
   allowedLessons: number[];
 };
 
+export type Options = {
+  name: string;
+  correct: boolean;
+};
+
 export type Question = {
   _id: string;
   type: "SELECT" | "ASSIST";
   data: {
     question: string;
-    options: string[];
+    options: Options[];
   };
   lessonId: string;
 };

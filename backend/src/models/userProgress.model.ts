@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { Question } from "./question.model";
 
 const userProgressSchema = new mongoose.Schema({
   userId: {
@@ -7,12 +8,12 @@ const userProgressSchema = new mongoose.Schema({
     required: true,
   },
   completedQuestions: {
-    type: mongoose.Schema.Types.Array,
+    type: [Schema.Types.String],
     required: true,
     default: [],
   },
   allowedLessons: {
-    type: mongoose.Schema.Types.Array,
+    type: [Schema.Types.Number],
     required: true,
     default: [1],
   },
