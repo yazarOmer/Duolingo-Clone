@@ -1,12 +1,14 @@
 import { updateUserProgress } from "@/data/UpdateUserProgress";
-import { RootState } from "@/store/store";
+import { AppDispatch, RootState } from "@/store/store";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Question } from "./Question";
 import { Question as QuestionType } from "@/types";
+import { decreaseHearts } from "@/data/updateHearts";
+import { setUser } from "@/features/auth/authSlice";
 
 type QuizProps = {
   questions: {
@@ -29,6 +31,7 @@ export const Quiz = ({ questions, lessonId }: QuizProps) => {
     )
   );
 
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.auth.user);
 
   const { mutate } = useMutation({
@@ -45,6 +48,18 @@ export const Quiz = ({ questions, lessonId }: QuizProps) => {
       if (data.lessonCompleted) {
         navigate("/learn");
       }
+    },
+    onError: (error) => {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    },
+  });
+
+  const { mutate: decreaseHeartsMutation } = useMutation({
+    mutationFn: (data: { userId: string }) => decreaseHearts(data.userId),
+    onSuccess: (data) => {
+      dispatch(setUser(data));
     },
     onError: (error) => {
       if (error instanceof Error) {
@@ -100,7 +115,10 @@ export const Quiz = ({ questions, lessonId }: QuizProps) => {
         toast.error("No hearts");
       }
     } else {
-      setStatus("wrong");
+      if (user) {
+        decreaseHeartsMutation({ userId: user.id });
+        setStatus("wrong");
+      }
     }
   };
   return (

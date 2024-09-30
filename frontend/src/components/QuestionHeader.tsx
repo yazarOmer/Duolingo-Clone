@@ -8,16 +8,10 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { useState } from "react";
 
 type QuestionHeaderProps = {
-  totalQuestion: number;
-  completedLen: number;
   progress: number;
 };
 
-export const QuestionHeader = ({
-  totalQuestion,
-  progress,
-  completedLen,
-}: QuestionHeaderProps) => {
+export const QuestionHeader = ({ progress }: QuestionHeaderProps) => {
   const [open, setOpen] = useState(false);
   const user = useSelector((state: RootState) => state.auth.user);
   return (

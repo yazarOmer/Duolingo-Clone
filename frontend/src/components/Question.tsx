@@ -18,20 +18,14 @@ type QuestionProps = {
 export const Question = ({
   question,
   progress,
-  totalQuestionLen,
   selectedOption,
-  completedLen,
   onSelect,
   status,
   onContinue,
 }: QuestionProps) => {
   return (
     <div className="flex flex-col h-screen">
-      <QuestionHeader
-        progress={progress}
-        totalQuestion={totalQuestionLen}
-        completedLen={completedLen}
-      />
+      <QuestionHeader progress={progress} />
       <div className="h-full flex flex-col items-center">
         <div className="max-w-6xl mx-auto flex-1 w-full px-20 flex flex-col justify-center gap-10">
           <QuestionSentence question={question.data.question} />
