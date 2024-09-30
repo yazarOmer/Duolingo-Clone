@@ -10,10 +10,12 @@ import { useState } from "react";
 type QuestionHeaderProps = {
   totalQuestion: number;
   completedLen: number;
+  progress: number;
 };
 
 export const QuestionHeader = ({
   totalQuestion,
+  progress,
   completedLen,
 }: QuestionHeaderProps) => {
   const [open, setOpen] = useState(false);
@@ -45,7 +47,7 @@ export const QuestionHeader = ({
         </DialogContent>
       </Dialog>
 
-      <Progress value={Math.floor((completedLen / totalQuestion) * 100)} />
+      <Progress value={progress} />
 
       <div className="flex items-center gap-2">
         <img src="/heart.svg" alt="heart" />

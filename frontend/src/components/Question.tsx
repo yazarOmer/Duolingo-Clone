@@ -6,6 +6,7 @@ import { QuestionFooter } from "./QuestionFooter";
 
 type QuestionProps = {
   question: QuestionType;
+  progress: number;
   totalQuestionLen: number;
   completedLen: number;
   status: "correct" | "wrong" | "none";
@@ -16,6 +17,7 @@ type QuestionProps = {
 
 export const Question = ({
   question,
+  progress,
   totalQuestionLen,
   selectedOption,
   completedLen,
@@ -26,6 +28,7 @@ export const Question = ({
   return (
     <div className="flex flex-col h-screen">
       <QuestionHeader
+        progress={progress}
         totalQuestion={totalQuestionLen}
         completedLen={completedLen}
       />
