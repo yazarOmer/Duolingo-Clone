@@ -34,7 +34,11 @@ export const Gem = () => {
         onMouseLeave={handleMouseLeave}
       >
         <Button variant="ghost">
-          <img src="/gem.svg" alt="gem" className="size-6 mr-5" />
+          <img
+            src="https://d35aaqx5ub95lt.cloudfront.net/images/gems/45c14e05be9c1af1d7d0b54c6eed7eee.svg"
+            alt="gem"
+            className="size-7 mr-5"
+          />
           <p className="font-extrabold text-sky-400 tracking-wider">
             {user.gem}
           </p>
