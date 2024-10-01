@@ -81,7 +81,6 @@ export const GetUserProgress = async (req: Request, res: Response) => {
 export const decreaseHearts = async (req: Request, res: Response) => {
   try {
     const { userId } = req.body;
-    console.log(userId);
 
     if (!userId) {
       throw new Error("User ID is required");
@@ -94,6 +93,41 @@ export const decreaseHearts = async (req: Request, res: Response) => {
     }
 
     user.lifePoint -= 1;
+    await user.save();
+
+    return res.status(200).json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      gem: user.gem,
+      lifePoint: user.lifePoint,
+      point: user.point,
+      createdAt: user.createdAt,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+};
+
+export const refillHearts = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      throw new Error("User ID is required");
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    user.gem -= 50;
+    user.lifePoint = 5;
     await user.save();
 
     return res.status(200).json({

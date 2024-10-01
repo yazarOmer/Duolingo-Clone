@@ -13,6 +13,7 @@ import LearnPage from "./pages/protected/LearnPage.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import AuthRoute from "./components/AuthRoute.tsx";
 import LessonPage from "./pages/protected/LessonPage.tsx";
+import ShopPage from "./pages/protected/Shop.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,10 @@ const router = createBrowserRouter([
   },
   {
     element: <ProtectedRoute />,
-    children: [{ path: "/learn", element: <LearnPage /> }],
+    children: [
+      { path: "/learn", element: <LearnPage /> },
+      { path: "/shop", element: <ShopPage /> },
+    ],
   },
   {
     element: <AuthRoute />,
