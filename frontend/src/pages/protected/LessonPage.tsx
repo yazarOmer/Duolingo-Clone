@@ -13,13 +13,13 @@ const LessonPage = () => {
     queryFn: () => getQuestions(id as string),
   });
 
-  if (isLoading) {
+  if (isLoading || !questions || !id) {
     return <Loading />;
   }
 
-  if (!questions || !id) {
-    return navigate("/learn");
-  }
+  // if () {
+  //   return navigate("/learn");
+  // }
 
   return <Quiz questions={questions} lessonId={id} />;
 };

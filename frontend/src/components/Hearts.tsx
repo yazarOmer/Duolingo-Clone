@@ -42,6 +42,7 @@ export const Heart = () => {
         <h2 className="text-2xl font-extrabold text-zinc-700">Canlar</h2>
         <div className="flex items-center gap-3">
           {user?.lifePoint &&
+            user.lifePoint > 0 &&
             Array(user?.lifePoint)
               .fill(0)
               .map((_, index) => (

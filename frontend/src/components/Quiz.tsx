@@ -9,6 +9,8 @@ import { Question } from "./Question";
 import { Question as QuestionType } from "@/types";
 import { decreaseHearts } from "@/data/updateHearts";
 import { setUser } from "@/features/auth/authSlice";
+import { HeartModal } from "./HeartsModal";
+import { toggleModal } from "@/features/modal/modalSlice";
 
 type QuizProps = {
   questions: {
@@ -116,26 +118,32 @@ export const Quiz = ({ questions, lessonId }: QuizProps) => {
         });
         correctAudio.play();
       } else {
-        toast.error("No hearts");
+        dispatch(toggleModal());
       }
     } else {
-      if (user) {
+      if (user && user.lifePoint > 0) {
         wrongAudio.play();
         decreaseHeartsMutation({ userId: user.id });
         setStatus("wrong");
+      } else {
+        dispatch(toggleModal());
       }
     }
   };
+
   return (
-    <Question
-      question={actualQuestion}
-      progress={progress}
-      onSelect={onSelect}
-      selectedOption={selectedOption}
-      totalQuestionLen={totalQuestion}
-      completedLen={completedLen}
-      status={status}
-      onContinue={onContinue}
-    />
+    <>
+      <Question
+        question={actualQuestion}
+        progress={progress}
+        onSelect={onSelect}
+        selectedOption={selectedOption}
+        totalQuestionLen={totalQuestion}
+        completedLen={completedLen}
+        status={status}
+        onContinue={onContinue}
+      />
+      <HeartModal />
+    </>
   );
 };

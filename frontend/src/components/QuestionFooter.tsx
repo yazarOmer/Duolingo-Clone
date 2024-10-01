@@ -6,14 +6,12 @@ type QuestionFooterProps = {
   onCheck: () => void;
   status: "correct" | "wrong" | "none";
   disabled?: boolean;
-  lessonId?: boolean;
 };
 
 export const QuestionFooter = ({
   onCheck,
   status,
   disabled,
-  lessonId,
 }: QuestionFooterProps) => {
   return (
     <div

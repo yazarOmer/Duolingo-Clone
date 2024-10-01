@@ -6,11 +6,9 @@ import { deleteUser } from "@/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 
 export const MoreButton = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
 
   const { mutate: LogoutMutation } = useMutation({
     mutationFn: async () => {
@@ -40,18 +38,18 @@ export const MoreButton = () => {
         className="flex items-center justify-start  flex-1"
       >
         <PiDotsThreeCircleFill className="size-8 text-purple-400 -translate-x-2" />
-        daha fazla
+        More
       </Button>
       <div className="hidden hover:flex group-hover:flex flex-col border-2 rounded-lg bg-white w-[200px] py-1 absolute  left-[215px]">
         <Button variant="sidebar" className="flex-1 rounded-none">
-          ayarlar
+          Settings
         </Button>
         <Button
           onClick={onClick}
           variant="sidebar"
           className="flex-1 rounded-none"
         >
-          çıkış yap
+          Logout
         </Button>
       </div>
     </div>
