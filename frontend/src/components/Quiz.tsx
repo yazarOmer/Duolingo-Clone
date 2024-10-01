@@ -72,6 +72,9 @@ export const Quiz = ({ questions, lessonId }: QuizProps) => {
   const totalQuestion = questions.totalQuestionsLength;
   const completedLen = questions.completedQuestionsLength;
 
+  const correctAudio = new Audio("/correct.mp3");
+  const wrongAudio = new Audio("/wrong.mp3");
+
   const onNext = () => {
     setOrder((prev) => prev + 1);
   };
@@ -111,11 +114,13 @@ export const Quiz = ({ questions, lessonId }: QuizProps) => {
           lessonId: lessonId as string,
           questionId: actualQuestion._id,
         });
+        correctAudio.play();
       } else {
         toast.error("No hearts");
       }
     } else {
       if (user) {
+        wrongAudio.play();
         decreaseHeartsMutation({ userId: user.id });
         setStatus("wrong");
       }
