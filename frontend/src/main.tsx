@@ -14,6 +14,7 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import AuthRoute from "./components/AuthRoute.tsx";
 import LessonPage from "./pages/protected/LessonPage.tsx";
 import ShopPage from "./pages/protected/Shop.tsx";
+import Leaderboard from "./pages/protected/Leaderboard.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/learn", element: <LearnPage /> },
       { path: "/shop", element: <ShopPage /> },
+      { path: "/leaderboard", element: <Leaderboard /> },
     ],
   },
   {

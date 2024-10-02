@@ -3,13 +3,13 @@ import { Lesson } from "../models/lesson.model";
 
 export const createLesson = async (req: Request, res: Response) => {
   try {
-    const { title, unitId } = req.body;
+    const { title, unitId, order } = req.body;
 
     if (!title || !unitId) {
       throw new Error("All fields are required");
     }
 
-    const lesson = new Lesson({ title, unitId });
+    const lesson = new Lesson({ title, unitId, order });
 
     await lesson.save();
 
@@ -23,7 +23,8 @@ export const createLesson = async (req: Request, res: Response) => {
 
 export const getLessons = async (req: Request, res: Response) => {
   try {
-    const lessons = await Lesson.find({});
+    const { unitId } = req.params;
+    const lessons = await Lesson.find({ unitId });
 
     return res.status(200).json(lessons);
   } catch (error) {

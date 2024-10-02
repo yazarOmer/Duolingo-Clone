@@ -16,6 +16,10 @@ const lessonSchema = new mongoose.Schema(
       default: [],
       ref: "Question",
     },
+    order: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -4,6 +4,6 @@ import { createLesson, getLessons } from "../controllers/lesson.controller";
 const router = express.Router();
 
 router.post("/", createLesson);
-router.get("/", getLessons);
+router.get("/:unitId", getLessons);
 
 export default router;

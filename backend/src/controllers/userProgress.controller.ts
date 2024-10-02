@@ -29,6 +29,12 @@ export const UpdateUserProgress = async (req: Request, res: Response) => {
       throw new Error("All fields are required");
     }
 
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
     const lesson = await Lesson.findById(lessonId);
 
     if (!lesson) {
@@ -41,6 +47,8 @@ export const UpdateUserProgress = async (req: Request, res: Response) => {
       throw new Error("Progress not found");
     }
 
+    user.point += 10;
+    await user.save();
     progress.completedQuestions.push(questionId);
     await progress.save();
 
@@ -140,6 +148,18 @@ export const refillHearts = async (req: Request, res: Response) => {
       point: user.point,
       createdAt: user.createdAt,
     });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+};
+
+export const getLeaderboard = async (req: Request, res: Response) => {
+  try {
+    const usersByPoints = await User.find();
+
+    return res.status(200).json(usersByPoints);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(400).json({ message: error.message });

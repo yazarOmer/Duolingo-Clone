@@ -2,6 +2,7 @@ import express from "express";
 import {
   CreateUserProgress,
   decreaseHearts,
+  getLeaderboard,
   GetUserProgress,
   refillHearts,
   UpdateUserProgress,
@@ -11,8 +12,9 @@ const router = express.Router();
 
 router.post("/", CreateUserProgress);
 router.put("/", UpdateUserProgress);
-router.get("/:userId", GetUserProgress);
 router.post("/hearts", decreaseHearts);
 router.post("/refillHearts", refillHearts);
+router.get("/leaderboard", getLeaderboard);
+router.get("/:userId", GetUserProgress);
 
 export default router;

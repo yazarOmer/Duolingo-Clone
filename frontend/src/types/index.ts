@@ -20,6 +20,7 @@ export type Lesson = {
   title: string;
   unitId: string;
   questions: string[];
+  order: number;
 };
 
 export type UserProgress = {

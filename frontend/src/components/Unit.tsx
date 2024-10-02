@@ -19,8 +19,8 @@ export const Unit = ({ unit }: UnitProps) => {
     queryKey: ["user-progress"],
   });
   const { data: lessons, isPending } = useQuery({
-    queryFn: getLessons,
-    queryKey: ["lessons"],
+    queryFn: () => getLessons(unit._id),
+    queryKey: ["lessons", unit._id],
   });
 
   if (isPending || pendingProgress || !isSuccess) {
@@ -35,8 +35,8 @@ export const Unit = ({ unit }: UnitProps) => {
       </div>
       <div className="flex flex-col items-center gap-4">
         {lessons?.map((lesson, index) => {
-          const isLocked = !userProgress.allowedLessons.includes(index + 1);
-          const isCurrent = userProgress.allowedLessons.at(-1) == index + 1;
+          const isLocked = !userProgress.allowedLessons.includes(lesson.order);
+          const isCurrent = userProgress.allowedLessons.at(-1) == lesson.order;
           const isFirst = index === 0;
 
           const isCompleted =
